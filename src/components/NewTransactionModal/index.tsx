@@ -3,8 +3,8 @@ import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 import close from "../../assets/close.png";
 import Entradas from "../../assets/Entradas.png";
 import Saídas from "../../assets/Saídas.png";
-import { useState, type FormEvent } from "react";
-import { api } from "../../services/api";
+import { useContext, useState, type FormEvent } from "react";
+import { TransactionsContext } from "../../TransactionsContext";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -16,21 +16,28 @@ export function NewTransactionModal({
   onRequestClose,
 }: NewTransactionModalProps) {
   const [title, setTitle] = useState("");
-  const [value, setValue] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
-
   const [type, setType] = useState("deposit");
-
-  function handleCreateNewTransaction(event: FormEvent) {
+  
+  const {createTransaction} = useContext(TransactionsContext)
+  
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
 
-    const data = {
+    await createTransaction({
       title,
-      value,
+      amount,
       category,
-      type
-    }
-    api.post('/transactions', data) //envia no formato json
+      type,
+    })
+    
+    setTitle('')
+    setAmount(0)
+    setCategory('')
+    setType('deposit')
+
+    onRequestClose()
   }
 
   return (
@@ -47,10 +54,22 @@ export function NewTransactionModal({
       >
         <img src={close} alt="Fechar modal" />
       </button>
+
       <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastrar transação</h2>
-        <input type="text" placeholder="Nome" value={title} onChange={event => setTitle(event.target.value)}/>
-        <input type="number" placeholder="Preço" value={value} onChange={event => setValue(Number(event.target.value))}/>
+        <input 
+          type="text" 
+          placeholder="Nome" 
+          value={title} 
+          onChange={event => setTitle(event.target.value)}
+        />
+
+        <input 
+          type="number" 
+          placeholder="Preço" 
+          value={amount} 
+          onChange={event => setAmount(Number(event.target.value))}
+        />
 
         <TransactionTypeContainer>
           <RadioBox
