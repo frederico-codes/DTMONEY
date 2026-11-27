@@ -1,3 +1,5 @@
+![DT Money Capa](./src/assets/Capa.svg)
+
 # 💰 DT Money
 
 **Uma aplicação de gestão financeira moderna e intuitiva para controlar seus gastos e receitas em tempo real.**
