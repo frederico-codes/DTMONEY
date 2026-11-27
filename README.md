@@ -179,6 +179,14 @@ Calcula dinamicamente:
 
 ---
 
+## 🎨 Design e Protótipo
+
+Visualize o design completo do projeto no Figma:
+
+[📋 Acesse o Protótipo no Figma](https://www.figma.com/design/afkdUke5RBxKloeqGeu0XR/dtmoney-Ignite--Copy---c%C3%B3pia-?node-id=0-1&p=f&m=dev)
+
+---
+
 ## 📄 Licença
 
 Este projeto é de código aberto e está disponível sob a licença padrão. Consulte o arquivo LICENSE para mais detalhes.
